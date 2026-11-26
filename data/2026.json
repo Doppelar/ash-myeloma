@@ -1,0 +1,484 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "title": "ASH 2026",
+  "period": "2026年12月12〜15日",
+  "location": "ニューオーリンズ",
+  "asOf": "2026年11月27日",
+  "source": "https://www.jnj.com/innovativemedicine/download/ASH-2026-abstract-chart",
+  "release": "https://www.jnj.com/media-center/press-releases/johnson-johnson-showcases-continued-hematology-leadership-and-next-generation-innovation-at-ash-2026",
+  "scope": "J&J掲載の骨髄腫関連24演題と、ASH公式プログラムで確認した追加6演題。公式抄録へのリンクがあるカードは抄録本文を確認しています。",
+  "reports": [
+    {
+      "id": "0695",
+      "study": "MajesTEC-3",
+      "products": [
+        "T",
+        "D"
+      ],
+      "population": "R",
+      "format": "口頭",
+      "date": "2026-12-13",
+      "title": "併用療法で腫瘍量が減る仕組み",
+      "summary": "テクリスタマブ＋ダラツムマブでみられた迅速で持続的な腫瘍量の減少と、細胞傷害性の獲得免疫の拡大との関連を調べた薬力学解析。",
+      "tags": []
+    },
+    {
+      "id": "2275",
+      "study": "MajesTEC-3 / 9",
+      "products": [
+        "T",
+        "D"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "免疫グロブリン補充と重症感染",
+      "summary": "二重特異性抗体治療中の継続的な免疫グロブリン補充と重症感染リスクの関連を、限界構造モデルで推定する解析。",
+      "tags": []
+    },
+    {
+      "id": "2786",
+      "study": "HONEUR",
+      "products": [],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "欧州の4・5次治療の実態",
+      "summary": "欧州の診療データから、4次・5次治療を受けた患者の背景、治療パターン、生存を調べた。",
+      "tags": []
+    },
+    {
+      "id": "5776",
+      "study": "REALiTEC-2",
+      "products": [
+        "T"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-14",
+      "title": "高齢患者でのテクリスタマブ",
+      "summary": "再発・難治性骨髄腫の高齢患者を対象にした実臨床研究の事後解析。",
+      "tags": []
+    },
+    {
+      "id": "6316",
+      "study": "CoMMitmenTT-TEC",
+      "products": [
+        "T"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-14",
+      "title": "後治療ラインのテクリスタマブ単剤",
+      "summary": "北米・欧州・中南米・アジアの実臨床における単剤使用についての更新報告。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=694664",
+      "details": {
+        "participants": "実臨床でテクリスタマブ単剤を開始した再発・難治性患者609人。前治療の平均4.8ライン。",
+        "design": "米国と欧州・中東・アフリカの後ろ向き診療録研究とカナダのレジストリ集計を統合。",
+        "results": "平均追跡10.1か月。全奏効率73.5%、12か月PFS率55.0%、12か月全生存率68.6%。",
+        "limitations": "グレード3〜4の感染は19.9%、致死的感染は2.7%。日本・ブラジル・中国のデータは抄録時点で収集中。"
+      }
+    },
+    {
+      "id": "0418",
+      "study": "TALisman",
+      "products": [
+        "V"
+      ],
+      "population": "R",
+      "format": "口頭",
+      "date": "2026-12-12",
+      "title": "口腔関連の副作用はいつ起き、いつ改善するか",
+      "summary": "タルケタマブ治療時の口腔関連有害事象の発現と改善の時期を、予防的介入の有無別に評価。",
+      "tags": []
+    },
+    {
+      "id": "0426",
+      "study": "MonumenTAL-6",
+      "products": [
+        "T",
+        "V"
+      ],
+      "population": "R",
+      "format": "口頭",
+      "date": "2026-12-12",
+      "title": "二重特異性抗体の併用を早期ラインで比較",
+      "summary": "前治療1〜4ラインの再発・難治性患者838人の第3相中間解析。12か月無増悪生存率はテクリスタマブ＋タルケタマブ88.6%、タルケタマブ＋ポマリドミド73.1%、対照（EPd/PVd）30.4%。無増悪生存期間のハザード比は対照比0.11、0.27。グレード3/4の感染は順に31.7%、25.4%、24.8%。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=692431",
+      "details": {
+        "participants": "再発・難治性、前治療1〜4ライン。抗CD38抗体とレナリドミドの使用歴あり。838人。",
+        "design": "第3相の事前計画中間解析。テクリスタマブ＋タルケタマブ、タルケタマブ＋ポマリドミド、医師選択のEPd／PVdに無作為割付。主要評価項目は独立判定委員会による無増悪生存期間（PFS）。",
+        "results": "追跡中央値13.4か月。12か月PFS率は88.6%、73.1%、30.4%。12か月全生存率は91.3%、88.8%、79.6%。",
+        "limitations": "グレード3/4の感染は31.7%、25.4%、24.8%。味覚変化は76.0%、73.9%、4.5%。"
+      }
+    },
+    {
+      "id": "2294",
+      "study": "RedirectTT-1",
+      "products": [
+        "T",
+        "V"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "髄外病変に対する二重標的療法",
+      "summary": "髄外病変を伴う再発・難治性骨髄腫で、併用療法への反応に関連する薬力学的機序とバイオマーカーを調べた。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=695269",
+      "details": {
+        "participants": "測定可能な真の髄外病変を伴う再発・難治性患者。",
+        "design": "第1/2相RedirecTT-1試験のテクリスタマブ＋タルケタマブ併用群で、血液とベースラインの骨髄検体を解析。",
+        "results": "骨髄のBCMA・GPRC5D発現は解析した18人で奏効との関連を示さなかった。奏効例では持続的なT細胞増加や早期のサイトカイン上昇が観察された。",
+        "limitations": "探索的な関連解析。髄外病変の組織検体は全例から得られていない。"
+      }
+    },
+    {
+      "id": "4561",
+      "study": "CoMMitmenTT-TAL",
+      "products": [
+        "V"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-13",
+      "title": "後治療ラインのタルケタマブ単剤",
+      "summary": "北米・欧州・中南米・アジアの実臨床における単剤使用の初回報告。",
+      "tags": []
+    },
+    {
+      "id": "5770",
+      "study": "MonumenTAL-3",
+      "products": [
+        "V",
+        "D"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-14",
+      "title": "タルケタマブ併用時の感染と液性免疫",
+      "summary": "タルケタマブとダラツムマブの併用を、ポマリドミドの有無も含めて検討した第3相試験の感染・液性免疫解析。",
+      "tags": []
+    },
+    {
+      "id": "6310",
+      "study": "米国の大学医療施設",
+      "products": [
+        "V"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-14",
+      "title": "タルケタマブの米国実臨床成績",
+      "summary": "米国の大学医療施設で治療を受けた再発・難治性骨髄腫患者を対象とする後ろ向き観察研究。",
+      "tags": []
+    },
+    {
+      "id": "0110",
+      "study": "MajesTEC-5",
+      "products": [
+        "X",
+        "D"
+      ],
+      "population": "E",
+      "format": "口頭",
+      "date": "2026-12-12",
+      "title": "初発に対する三重特異性抗体の初報",
+      "summary": "移植適応の初発患者を対象とした第2相試験。開発中のramantamig、ダラツムマブ、レナリドミドの3剤併用の初回成績。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=688049",
+      "details": {
+        "participants": "自家移植適応の初発患者21人。年齢中央値61歳。",
+        "design": "第2相MajesTEC-5のramantamig＋ダラツムマブ＋レナリドミド導入群。主要評価項目は有害事象の発生と重症度。",
+        "results": "追跡中央値7.1か月。全奏効21/21人、完全奏効以上17/21人。3サイクル時点のMRD評価可能20人全員が10⁻⁵で陰性。",
+        "limitations": "グレード3〜4の有害事象は16/21人、重篤な有害事象は5/21人。少数例で観察期間の短い初回報告。"
+      }
+    },
+    {
+      "id": "0111",
+      "study": "PERSEUS",
+      "products": [
+        "D"
+      ],
+      "population": "E",
+      "format": "口頭",
+      "date": "2026-12-12",
+      "title": "MRDに基づくダラツムマブ維持療法の中止",
+      "summary": "移植適応の初発患者709人を対象にした第3相長期解析。追跡期間中央値81.3か月。6年無増悪生存率はD-VRd導入・地固め＋D-R維持群81.1%、VRd＋R維持群56.1%。MRD陰性（10⁻⁵）が48か月持続した割合は53.5%対22.9%。試験規定に沿ったMRD指標によるダラツムマブ維持中止後の経過も評価。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=688050",
+      "details": {
+        "participants": "自家移植適応の初発患者709人。",
+        "design": "第3相無作為化試験。D-VRd導入・地固め＋ダラツムマブ・レナリドミド維持と、VRd＋レナリドミド維持を比較。",
+        "results": "追跡中央値81.3か月。6年PFS率81.1%対56.1%（HR 0.35、95%信頼区間0.26–0.46）。MRD陰性（10⁻⁵）の48か月持続率は53.5%対22.9%。",
+        "limitations": "維持療法中止後の経過は、試験規定のMRD基準を満たした患者の解析。"
+      }
+    },
+    {
+      "id": "0112",
+      "study": "AQUILA",
+      "products": [
+        "D"
+      ],
+      "population": "S",
+      "format": "口頭",
+      "date": "2026-12-12",
+      "title": "高リスクくすぶり型の最終生存解析",
+      "summary": "高リスクくすぶり型390人を対象に、皮下ダラツムマブ単剤と積極的経過観察を比較した第3相最終解析。追跡期間中央値88.8か月。7年全生存率は87.8%対78.7%（死亡のハザード比0.52、95%信頼区間0.32–0.87）。活動性骨髄腫への進行または死亡までの期間の中央値は82.5か月対34.9か月。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=693937",
+      "details": {
+        "participants": "高リスクくすぶり型390人。",
+        "design": "第3相無作為化試験。皮下ダラツムマブ単剤と積極的経過観察を比較。",
+        "results": "追跡中央値88.8か月。活動性骨髄腫への進行または死亡までの期間の中央値は82.5か月対34.9か月（HR 0.48、95%信頼区間0.36–0.63）。7年全生存率87.8%対78.7%。",
+        "limitations": "延長追跡で新たな安全性上の懸念は報告されなかった。"
+      }
+    },
+    {
+      "id": "0940",
+      "study": "AQUILA / SPARK",
+      "products": [],
+      "population": "S",
+      "format": "口頭",
+      "date": "2026-12-14",
+      "title": "高リスクくすぶり型の経過観察成績",
+      "summary": "無作為化試験AQUILAの経過観察と、実臨床研究SPARKの経過観察成績を比較。",
+      "tags": []
+    },
+    {
+      "id": "4008",
+      "study": "TAURUS",
+      "products": [
+        "D"
+      ],
+      "population": "E",
+      "format": "ポスター",
+      "date": "2026-12-13",
+      "title": "末梢血と骨髄によるMRD測定",
+      "summary": "D-VRdで治療を受けた移植適応の初発患者について、末梢血と骨髄のMRD検査法を評価する前向き第2相研究。",
+      "tags": []
+    },
+    {
+      "id": "4020",
+      "study": "AURIGA",
+      "products": [
+        "D"
+      ],
+      "population": "P",
+      "format": "ポスター",
+      "date": "2026-12-13",
+      "title": "移植後維持療法と生活の質",
+      "summary": "ダラツムマブ＋レナリドミドとレナリドミド単剤を比較し、健康関連QOLを評価。",
+      "tags": []
+    },
+    {
+      "id": "4028",
+      "study": "AURIGA",
+      "products": [
+        "D"
+      ],
+      "population": "P",
+      "format": "ポスター",
+      "date": "2026-12-13",
+      "title": "移植後維持療法の有効性・安全性",
+      "summary": "皮下ダラツムマブ＋レナリドミドとレナリドミド単剤を比較した最終解析。",
+      "tags": []
+    },
+    {
+      "id": "4558",
+      "study": "HONEUR",
+      "products": [],
+      "population": "P",
+      "format": "ポスター",
+      "date": "2026-12-13",
+      "title": "自家移植を受けた患者の実臨床成績",
+      "summary": "2018〜2024年に自家造血幹細胞移植を受けた初発患者の背景と転帰を複数国で調査。",
+      "tags": []
+    },
+    {
+      "id": "5783",
+      "study": "AURIGA",
+      "products": [
+        "D"
+      ],
+      "population": "P",
+      "format": "ポスター",
+      "date": "2026-12-14",
+      "title": "移植後維持療法中のMRDの推移",
+      "summary": "皮下ダラツムマブ＋レナリドミドとレナリドミド単剤を比較したMRD推移の最終解析。",
+      "tags": []
+    },
+    {
+      "id": "0272",
+      "study": "CITADEL",
+      "products": [
+        "C"
+      ],
+      "population": "R",
+      "format": "口頭",
+      "date": "2026-12-12",
+      "title": "CAR-T治療後のパーキンソニズム",
+      "summary": "絶対リンパ球数に基づく先制的ステロイド投与とパーキンソニズムのリスクを検討した多施設観察研究の初回報告。",
+      "tags": []
+    },
+    {
+      "id": "0276",
+      "study": "CARTITUDE-4",
+      "products": [
+        "C"
+      ],
+      "population": "R",
+      "format": "口頭",
+      "date": "2026-12-12",
+      "title": "ダラツムマブ抵抗性患者の長期生存",
+      "summary": "レナリドミド抵抗性を組入れ条件とした第3相試験で、ダラツムマブにも抵抗性を示す患者群におけるcilta-cel投与後の生存を評価。",
+      "tags": [
+        "Len-R"
+      ]
+    },
+    {
+      "id": "2272",
+      "study": "CARTITUDE-4",
+      "products": [
+        "C"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "CAR-T投与時の腫瘍量と転帰",
+      "summary": "レナリドミド抵抗性の患者を含む第3相試験で、cilta-cel投与時の腫瘍量が転帰を予測するかを評価。",
+      "tags": [
+        "Len-R"
+      ]
+    },
+    {
+      "id": "2273",
+      "study": "PASS",
+      "products": [
+        "C"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "早期ラインでのCAR-Tの実臨床成績",
+      "summary": "欧州とブラジルの前向き非介入の市販後安全性調査から、早期ラインでの安全性と有効性を検討したサブグループ解析。",
+      "tags": []
+    },
+    {
+      "id": "0109",
+      "study": "BENEFIT",
+      "products": [
+        "I"
+      ],
+      "population": "I",
+      "format": "口頭",
+      "date": "2026-12-12",
+      "title": "移植非適応の初発に対するサークリサ併用の48か月成績",
+      "summary": "65〜79歳の第3相試験。サークリサ＋VRdとサークリサ＋Rdの48か月無増悪生存率は74.0%対65.7%。48か月までの制限平均無増悪生存期間には統計学的有意差がなかった（p=0.29）。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=688051",
+      "details": {
+        "participants": "初発・移植非適応、65〜79歳。",
+        "design": "第3相BENEFIT。サークリサ＋VRdとサークリサ＋Rdに無作為割付。",
+        "results": "追跡中央値48.9か月。48か月PFS率74.0%対65.7%。48か月までの制限平均PFS差1.9か月（95%信頼区間 −1.6〜5.4、p=0.29）。",
+        "limitations": "48か月までの解析では群間差は統計学的に有意ではなかった。10年推定はモデルによる外挿。"
+      }
+    },
+    {
+      "id": "2256",
+      "study": "ISASOCUT / IMROZ",
+      "products": [
+        "I"
+      ],
+      "population": "I",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "皮下投与と静脈内投与の生活の質",
+      "summary": "移植非適応の初発患者で、皮下サークリサ＋週1回ボルテゾミブのレジメンと静脈内サークリサ＋週2回ボルテゾミブのレジメンを比較。皮下投与を含む群のQOLが良好だった。投与経路と投与頻度が同時に異なる試験間比較。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=693949",
+      "details": {
+        "participants": "移植非適応の初発患者。",
+        "design": "ISASOCUTの皮下サークリサ＋週1回ボルテゾミブと、IMROZの静脈内サークリサ＋週2回ボルテゾミブを試験間比較。",
+        "results": "健康関連QOLの全般評価、身体・役割機能などで皮下投与を含む群に改善が報告された。",
+        "limitations": "サークリサの投与経路とボルテゾミブの頻度が同時に異なるため、投与経路単独の効果は推定できない。"
+      }
+    },
+    {
+      "id": "2259",
+      "study": "GMMG-HD6 / HD7",
+      "products": [
+        "I"
+      ],
+      "population": "E",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "導入療法後に採取した自家移植用細胞のMRD",
+      "summary": "サークリサを含む導入療法と採取した自家移植用細胞のMRD陰性率との関連を、2試験のサブセットで解析。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=693953"
+    },
+    {
+      "id": "2262",
+      "study": "RADAR",
+      "products": [
+        "I"
+      ],
+      "population": "P",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "超高リスク初発の移植後治療にサークリサを追加",
+      "summary": "自家移植を受けた高リスク染色体異常を2つ有する患者について、地固めと維持療法へのサークリサ追加を評価した無作為化試験の報告。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=693967"
+    },
+    {
+      "id": "4045",
+      "study": "CIBMTR",
+      "products": [
+        "A"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-13",
+      "title": "アベクマ投与後の感染と関連因子",
+      "summary": "再発・難治性患者821人の後ろ向き解析。臨床的に重要な感染は367人（44.7%）。多変量解析で投与前の血小板減少とLDH高値が感染に関連した。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=684237",
+      "details": {
+        "participants": "市販アベクマを投与した再発・難治性患者821人。年齢中央値66歳。",
+        "design": "CIBMTRデータの後ろ向き解析。投与後1年に報告された臨床的に重要な感染と投与前因子を評価。",
+        "results": "感染367/821人（44.7%）。多変量解析で血小板減少（調整オッズ比1.65）とLDH高値（同1.50）が感染に関連。",
+        "limitations": "追跡中央値11.6か月。感染と生存の関連は背景因子を調整すると弱まった。"
+      }
+    },
+    {
+      "id": "2233",
+      "study": "ネットワークメタ解析",
+      "products": [
+        "A",
+        "T",
+        "V",
+        "D",
+        "C"
+      ],
+      "population": "R",
+      "format": "ポスター",
+      "date": "2026-12-12",
+      "title": "二重特異性抗体とCAR-T療法の間接比較",
+      "summary": "第3相試験5件、計2,849人を対象とした解析。アベクマの無増悪生存期間のハザード比は各試験の標準治療に対し0.49（95%信頼区間0.37–0.64）。試験間の間接比較を含む。",
+      "tags": [],
+      "abstractUrl": "https://onlineprogram.hematology.org/paper-details.aspx?pid=693884",
+      "details": {
+        "participants": "再発・難治性患者を対象とした第3相試験5件、計2,849人。",
+        "design": "二重特異性抗体とCAR-Tを含むネットワークメタ解析。対照治療との比較を統合。",
+        "results": "アベクマのPFSのHR 0.49（95%信頼区間0.37–0.64）、全生存期間のHR 1.01（0.73–1.40）。",
+        "limitations": "薬剤同士の直接比較を伴わない推定。アベクマのMRD陰性の推定は対照群イベントが少なく不安定。"
+      }
+    }
+  ],
+  "program": "https://onlineprogram.hematology.org/"
+}

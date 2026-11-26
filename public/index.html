@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASH 多発性骨髄腫 演題ガイド</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef4f4;color:#132b37;font:16px/1.65 system-ui,sans-serif}main,.head{max-width:1130px;margin:auto;padding:24px}header{background:#0e3440;color:white}.head{padding-block:34px}.kicker{color:#8ee1cf;font-weight:700;letter-spacing:.12em}h1{font-size:clamp(1.9rem,6vw,3.35rem);margin:4px 0;line-height:1.2}h2,h3,p{margin:0 0 8px}header a{color:#a7eee0}a{color:#075e54}nav,.tools,.chips,.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tools{margin-top:18px}.panel,article{background:white;border:1px solid #c9dbdb;border-radius:14px;padding:18px}.panel{margin-bottom:18px}.overview,.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,295px),1fr));gap:12px}.overview div{background:#edf6f4;padding:12px;border-radius:8px}.row{margin:10px 0}.row strong{display:block;margin-bottom:5px}button,select,input,.file{font:inherit;padding:6px 11px;border-radius:8px;border:1px solid #9fb9b9;background:white;color:#163641}button,.file,select{cursor:pointer}button[aria-pressed=true]{background:#096359;color:white;border-color:#096359}input[type=search]{width:min(100%,350px)}:focus-visible{outline:3px solid #e88824;outline-offset:2px}.badge{background:#e4f2ee;border-radius:5px;padding:1px 7px;font-size:.88rem}.meta{font-size:.88rem;color:#385563;margin-bottom:8px}article h3{font-size:1.08rem}.study{font-weight:700;color:#087163}.utility{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.hint{font-size:.9rem;color:#385563}.source{font-size:.9rem}.file input{max-width:100%}footer{margin:23px 0}details summary{cursor:pointer}
+
+.report-detail{margin-top:12px;border-top:1px solid #c9dbdb;padding-top:9px}
+.report-detail summary{font-weight:700;color:#075e54}
+.report-detail dl{margin:10px 0}
+.report-detail dt{font-weight:700}
+.report-detail dd{margin:0 0 9px}
+</style>
+<header><div class="head"><div class="kicker">ASH 演題ガイド</div><h1>多発性骨髄腫</h1><p id="event"></p><nav><a id="program" hidden>ASH公式プログラム</a><a id="pdf">J&J 演題一覧（PDF）</a><a id="release">企業発表</a></nav><div class="tools"><label for="year">開催年</label><select id="year"></select></div></div></header>
+<main>
+<section class="panel" aria-labelledby="overviewTitle"><h2 id="overviewTitle">全体概要</h2><p id="scope"></p><div id="overview" class="overview"></div></section>
+<section class="panel" aria-labelledby="drugTitle"><h2 id="drugTitle">治療薬別のまとめ</h2><div id="drugOverview" class="overview"></div></section><section class="panel" aria-labelledby="filterTitle"><h2 id="filterTitle">演題を絞り込む</h2><label for="search">キーワード</label><div><input id="search" type="search" placeholder="演題番号、試験名、薬剤名など"></div><div id="filters"></div><p class="hint">同じ項目内のタグは「いずれか」、異なる項目は「すべて」で絞り込みます。製品タグは演題の治療・解析対象を示します。</p></section>
+<div class="utility"><h2 id="count" aria-live="polite"></h2><button id="clear">条件をクリア</button></div><section id="cards" class="cards" aria-label="演題一覧"></section>
+<footer class="panel"><details><summary>年度データの追加・更新</summary><p>見本を保存し、開催年・演題・出典を編集してJSONを読み込むと、このブラウザーに年度が追加されます。同じ年度の読み込みは上書きになります。別端末へ移す場合はJSONを保存して読み込んでください。</p><p class="hint">対象区分は E（初発・移植適応）、I（初発・移植非適応）、P（初発・移植後）、S（くすぶり型）、R（再発・難治性）。製品コードは D、V、T、C、X、I（サークリサ）、A（アベクマ）。製品を特定しない研究は空配列にします。</p><div class="tools"><button id="export">表示年度のJSONを保存</button><label class="file">年度JSONを読み込む <input type="file" id="import" accept=".json,application/json"></label></div><p id="status" role="status"></p></details></footer>
+</main>
+<script>
+const initial = {"schemaVersion":1,"year":2026,"title":"ASH 2026","period":"2026年12月12〜15日","location":"ニューオーリンズ","asOf":"2026年11月27日","source":"https://www.jnj.com/innovativemedicine/download/ASH-2026-abstract-chart","release":"https://www.jnj.com/media-center/press-releases/johnson-johnson-showcases-continued-hematology-leadership-and-next-generation-innovation-at-ash-2026","scope":"J&J掲載の骨髄腫関連24演題と、ASH公式プログラムで確認した追加6演題。公式抄録へのリンクがあるカードは抄録本文を確認しています。","reports":[{"id":"0695","study":"MajesTEC-3","products":["T","D"],"population":"R","format":"口頭","date":"2026-12-13","title":"併用療法で腫瘍量が減る仕組み","summary":"テクリスタマブ＋ダラツムマブでみられた迅速で持続的な腫瘍量の減少と、細胞傷害性の獲得免疫の拡大との関連を調べた薬力学解析。","tags":[]},{"id":"2275","study":"MajesTEC-3 / 9","products":["T","D"],"population":"R","format":"ポスター","date":"2026-12-12","title":"免疫グロブリン補充と重症感染","summary":"二重特異性抗体治療中の継続的な免疫グロブリン補充と重症感染リスクの関連を、限界構造モデルで推定する解析。","tags":[]},{"id":"2786","study":"HONEUR","products":[],"population":"R","format":"ポスター","date":"2026-12-12","title":"欧州の4・5次治療の実態","summary":"欧州の診療データから、4次・5次治療を受けた患者の背景、治療パターン、生存を調べた。","tags":[]},{"id":"5776","study":"REALiTEC-2","products":["T"],"population":"R","format":"ポスター","date":"2026-12-14","title":"高齢患者でのテクリスタマブ","summary":"再発・難治性骨髄腫の高齢患者を対象にした実臨床研究の事後解析。","tags":[]},{"id":"6316","study":"CoMMitmenTT-TEC","products":["T"],"population":"R","format":"ポスター","date":"2026-12-14","title":"後治療ラインのテクリスタマブ単剤","summary":"北米・欧州・中南米・アジアの実臨床における単剤使用についての更新報告。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=694664","details":{"participants":"実臨床でテクリスタマブ単剤を開始した再発・難治性患者609人。前治療の平均4.8ライン。","design":"米国と欧州・中東・アフリカの後ろ向き診療録研究とカナダのレジストリ集計を統合。","results":"平均追跡10.1か月。全奏効率73.5%、12か月PFS率55.0%、12か月全生存率68.6%。","limitations":"グレード3〜4の感染は19.9%、致死的感染は2.7%。日本・ブラジル・中国のデータは抄録時点で収集中。"}},{"id":"0418","study":"TALisman","products":["V"],"population":"R","format":"口頭","date":"2026-12-12","title":"口腔関連の副作用はいつ起き、いつ改善するか","summary":"タルケタマブ治療時の口腔関連有害事象の発現と改善の時期を、予防的介入の有無別に評価。","tags":[]},{"id":"0426","study":"MonumenTAL-6","products":["T","V"],"population":"R","format":"口頭","date":"2026-12-12","title":"二重特異性抗体の併用を早期ラインで比較","summary":"前治療1〜4ラインの再発・難治性患者838人の第3相中間解析。12か月無増悪生存率はテクリスタマブ＋タルケタマブ88.6%、タルケタマブ＋ポマリドミド73.1%、対照（EPd/PVd）30.4%。無増悪生存期間のハザード比は対照比0.11、0.27。グレード3/4の感染は順に31.7%、25.4%、24.8%。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=692431","details":{"participants":"再発・難治性、前治療1〜4ライン。抗CD38抗体とレナリドミドの使用歴あり。838人。","design":"第3相の事前計画中間解析。テクリスタマブ＋タルケタマブ、タルケタマブ＋ポマリドミド、医師選択のEPd／PVdに無作為割付。主要評価項目は独立判定委員会による無増悪生存期間（PFS）。","results":"追跡中央値13.4か月。12か月PFS率は88.6%、73.1%、30.4%。12か月全生存率は91.3%、88.8%、79.6%。","limitations":"グレード3/4の感染は31.7%、25.4%、24.8%。味覚変化は76.0%、73.9%、4.5%。"}},{"id":"2294","study":"RedirectTT-1","products":["T","V"],"population":"R","format":"ポスター","date":"2026-12-12","title":"髄外病変に対する二重標的療法","summary":"髄外病変を伴う再発・難治性骨髄腫で、併用療法への反応に関連する薬力学的機序とバイオマーカーを調べた。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=695269","details":{"participants":"測定可能な真の髄外病変を伴う再発・難治性患者。","design":"第1/2相RedirecTT-1試験のテクリスタマブ＋タルケタマブ併用群で、血液とベースラインの骨髄検体を解析。","results":"骨髄のBCMA・GPRC5D発現は解析した18人で奏効との関連を示さなかった。奏効例では持続的なT細胞増加や早期のサイトカイン上昇が観察された。","limitations":"探索的な関連解析。髄外病変の組織検体は全例から得られていない。"}},{"id":"4561","study":"CoMMitmenTT-TAL","products":["V"],"population":"R","format":"ポスター","date":"2026-12-13","title":"後治療ラインのタルケタマブ単剤","summary":"北米・欧州・中南米・アジアの実臨床における単剤使用の初回報告。","tags":[]},{"id":"5770","study":"MonumenTAL-3","products":["V","D"],"population":"R","format":"ポスター","date":"2026-12-14","title":"タルケタマブ併用時の感染と液性免疫","summary":"タルケタマブとダラツムマブの併用を、ポマリドミドの有無も含めて検討した第3相試験の感染・液性免疫解析。","tags":[]},{"id":"6310","study":"米国の大学医療施設","products":["V"],"population":"R","format":"ポスター","date":"2026-12-14","title":"タルケタマブの米国実臨床成績","summary":"米国の大学医療施設で治療を受けた再発・難治性骨髄腫患者を対象とする後ろ向き観察研究。","tags":[]},{"id":"0110","study":"MajesTEC-5","products":["X","D"],"population":"E","format":"口頭","date":"2026-12-12","title":"初発に対する三重特異性抗体の初報","summary":"移植適応の初発患者を対象とした第2相試験。開発中のramantamig、ダラツムマブ、レナリドミドの3剤併用の初回成績。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=688049","details":{"participants":"自家移植適応の初発患者21人。年齢中央値61歳。","design":"第2相MajesTEC-5のramantamig＋ダラツムマブ＋レナリドミド導入群。主要評価項目は有害事象の発生と重症度。","results":"追跡中央値7.1か月。全奏効21/21人、完全奏効以上17/21人。3サイクル時点のMRD評価可能20人全員が10⁻⁵で陰性。","limitations":"グレード3〜4の有害事象は16/21人、重篤な有害事象は5/21人。少数例で観察期間の短い初回報告。"}},{"id":"0111","study":"PERSEUS","products":["D"],"population":"E","format":"口頭","date":"2026-12-12","title":"MRDに基づくダラツムマブ維持療法の中止","summary":"移植適応の初発患者709人を対象にした第3相長期解析。追跡期間中央値81.3か月。6年無増悪生存率はD-VRd導入・地固め＋D-R維持群81.1%、VRd＋R維持群56.1%。MRD陰性（10⁻⁵）が48か月持続した割合は53.5%対22.9%。試験規定に沿ったMRD指標によるダラツムマブ維持中止後の経過も評価。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=688050","details":{"participants":"自家移植適応の初発患者709人。","design":"第3相無作為化試験。D-VRd導入・地固め＋ダラツムマブ・レナリドミド維持と、VRd＋レナリドミド維持を比較。","results":"追跡中央値81.3か月。6年PFS率81.1%対56.1%（HR 0.35、95%信頼区間0.26–0.46）。MRD陰性（10⁻⁵）の48か月持続率は53.5%対22.9%。","limitations":"維持療法中止後の経過は、試験規定のMRD基準を満たした患者の解析。"}},{"id":"0112","study":"AQUILA","products":["D"],"population":"S","format":"口頭","date":"2026-12-12","title":"高リスクくすぶり型の最終生存解析","summary":"高リスクくすぶり型390人を対象に、皮下ダラツムマブ単剤と積極的経過観察を比較した第3相最終解析。追跡期間中央値88.8か月。7年全生存率は87.8%対78.7%（死亡のハザード比0.52、95%信頼区間0.32–0.87）。活動性骨髄腫への進行または死亡までの期間の中央値は82.5か月対34.9か月。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=693937","details":{"participants":"高リスクくすぶり型390人。","design":"第3相無作為化試験。皮下ダラツムマブ単剤と積極的経過観察を比較。","results":"追跡中央値88.8か月。活動性骨髄腫への進行または死亡までの期間の中央値は82.5か月対34.9か月（HR 0.48、95%信頼区間0.36–0.63）。7年全生存率87.8%対78.7%。","limitations":"延長追跡で新たな安全性上の懸念は報告されなかった。"}},{"id":"0940","study":"AQUILA / SPARK","products":[],"population":"S","format":"口頭","date":"2026-12-14","title":"高リスクくすぶり型の経過観察成績","summary":"無作為化試験AQUILAの経過観察と、実臨床研究SPARKの経過観察成績を比較。","tags":[]},{"id":"4008","study":"TAURUS","products":["D"],"population":"E","format":"ポスター","date":"2026-12-13","title":"末梢血と骨髄によるMRD測定","summary":"D-VRdで治療を受けた移植適応の初発患者について、末梢血と骨髄のMRD検査法を評価する前向き第2相研究。","tags":[]},{"id":"4020","study":"AURIGA","products":["D"],"population":"P","format":"ポスター","date":"2026-12-13","title":"移植後維持療法と生活の質","summary":"ダラツムマブ＋レナリドミドとレナリドミド単剤を比較し、健康関連QOLを評価。","tags":[]},{"id":"4028","study":"AURIGA","products":["D"],"population":"P","format":"ポスター","date":"2026-12-13","title":"移植後維持療法の有効性・安全性","summary":"皮下ダラツムマブ＋レナリドミドとレナリドミド単剤を比較した最終解析。","tags":[]},{"id":"4558","study":"HONEUR","products":[],"population":"P","format":"ポスター","date":"2026-12-13","title":"自家移植を受けた患者の実臨床成績","summary":"2018〜2024年に自家造血幹細胞移植を受けた初発患者の背景と転帰を複数国で調査。","tags":[]},{"id":"5783","study":"AURIGA","products":["D"],"population":"P","format":"ポスター","date":"2026-12-14","title":"移植後維持療法中のMRDの推移","summary":"皮下ダラツムマブ＋レナリドミドとレナリドミド単剤を比較したMRD推移の最終解析。","tags":[]},{"id":"0272","study":"CITADEL","products":["C"],"population":"R","format":"口頭","date":"2026-12-12","title":"CAR-T治療後のパーキンソニズム","summary":"絶対リンパ球数に基づく先制的ステロイド投与とパーキンソニズムのリスクを検討した多施設観察研究の初回報告。","tags":[]},{"id":"0276","study":"CARTITUDE-4","products":["C"],"population":"R","format":"口頭","date":"2026-12-12","title":"ダラツムマブ抵抗性患者の長期生存","summary":"レナリドミド抵抗性を組入れ条件とした第3相試験で、ダラツムマブにも抵抗性を示す患者群におけるcilta-cel投与後の生存を評価。","tags":["Len-R"]},{"id":"2272","study":"CARTITUDE-4","products":["C"],"population":"R","format":"ポスター","date":"2026-12-12","title":"CAR-T投与時の腫瘍量と転帰","summary":"レナリドミド抵抗性の患者を含む第3相試験で、cilta-cel投与時の腫瘍量が転帰を予測するかを評価。","tags":["Len-R"]},{"id":"2273","study":"PASS","products":["C"],"population":"R","format":"ポスター","date":"2026-12-12","title":"早期ラインでのCAR-Tの実臨床成績","summary":"欧州とブラジルの前向き非介入の市販後安全性調査から、早期ラインでの安全性と有効性を検討したサブグループ解析。","tags":[]},{"id":"0109","study":"BENEFIT","products":["I"],"population":"I","format":"口頭","date":"2026-12-12","title":"移植非適応の初発に対するサークリサ併用の48か月成績","summary":"65〜79歳の第3相試験。サークリサ＋VRdとサークリサ＋Rdの48か月無増悪生存率は74.0%対65.7%。48か月までの制限平均無増悪生存期間には統計学的有意差がなかった（p=0.29）。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=688051","details":{"participants":"初発・移植非適応、65〜79歳。","design":"第3相BENEFIT。サークリサ＋VRdとサークリサ＋Rdに無作為割付。","results":"追跡中央値48.9か月。48か月PFS率74.0%対65.7%。48か月までの制限平均PFS差1.9か月（95%信頼区間 −1.6〜5.4、p=0.29）。","limitations":"48か月までの解析では群間差は統計学的に有意ではなかった。10年推定はモデルによる外挿。"}},{"id":"2256","study":"ISASOCUT / IMROZ","products":["I"],"population":"I","format":"ポスター","date":"2026-12-12","title":"皮下投与と静脈内投与の生活の質","summary":"移植非適応の初発患者で、皮下サークリサ＋週1回ボルテゾミブのレジメンと静脈内サークリサ＋週2回ボルテゾミブのレジメンを比較。皮下投与を含む群のQOLが良好だった。投与経路と投与頻度が同時に異なる試験間比較。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=693949","details":{"participants":"移植非適応の初発患者。","design":"ISASOCUTの皮下サークリサ＋週1回ボルテゾミブと、IMROZの静脈内サークリサ＋週2回ボルテゾミブを試験間比較。","results":"健康関連QOLの全般評価、身体・役割機能などで皮下投与を含む群に改善が報告された。","limitations":"サークリサの投与経路とボルテゾミブの頻度が同時に異なるため、投与経路単独の効果は推定できない。"}},{"id":"2259","study":"GMMG-HD6 / HD7","products":["I"],"population":"E","format":"ポスター","date":"2026-12-12","title":"導入療法後に採取した自家移植用細胞のMRD","summary":"サークリサを含む導入療法と採取した自家移植用細胞のMRD陰性率との関連を、2試験のサブセットで解析。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=693953"},{"id":"2262","study":"RADAR","products":["I"],"population":"P","format":"ポスター","date":"2026-12-12","title":"超高リスク初発の移植後治療にサークリサを追加","summary":"自家移植を受けた高リスク染色体異常を2つ有する患者について、地固めと維持療法へのサークリサ追加を評価した無作為化試験の報告。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=693967"},{"id":"4045","study":"CIBMTR","products":["A"],"population":"R","format":"ポスター","date":"2026-12-13","title":"アベクマ投与後の感染と関連因子","summary":"再発・難治性患者821人の後ろ向き解析。臨床的に重要な感染は367人（44.7%）。多変量解析で投与前の血小板減少とLDH高値が感染に関連した。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=684237","details":{"participants":"市販アベクマを投与した再発・難治性患者821人。年齢中央値66歳。","design":"CIBMTRデータの後ろ向き解析。投与後1年に報告された臨床的に重要な感染と投与前因子を評価。","results":"感染367/821人（44.7%）。多変量解析で血小板減少（調整オッズ比1.65）とLDH高値（同1.50）が感染に関連。","limitations":"追跡中央値11.6か月。感染と生存の関連は背景因子を調整すると弱まった。"}},{"id":"2233","study":"ネットワークメタ解析","products":["A","T","V","D","C"],"population":"R","format":"ポスター","date":"2026-12-12","title":"二重特異性抗体とCAR-T療法の間接比較","summary":"第3相試験5件、計2,849人を対象とした解析。アベクマの無増悪生存期間のハザード比は各試験の標準治療に対し0.49（95%信頼区間0.37–0.64）。試験間の間接比較を含む。","tags":[],"abstractUrl":"https://onlineprogram.hematology.org/paper-details.aspx?pid=693884","details":{"participants":"再発・難治性患者を対象とした第3相試験5件、計2,849人。","design":"二重特異性抗体とCAR-Tを含むネットワークメタ解析。対照治療との比較を統合。","results":"アベクマのPFSのHR 0.49（95%信頼区間0.37–0.64）、全生存期間のHR 1.01（0.73–1.40）。","limitations":"薬剤同士の直接比較を伴わない推定。アベクマのMRD陰性の推定は対照群イベントが少なく不安定。"}}],"program":"https://onlineprogram.hematology.org/"};
+const products={D:"ダラキューロ／ダラツムマブ",V:"タービー",T:"テクベイリ",C:"カービクティ",X:"ramantamig",I:"サークリサ",A:"アベクマ",N:"特定薬剤なし"};
+const aliases={D:"DARZALEX FASPRO DARZALEX daratumumab ダーザレックス",V:"TALVEY talquetamab タルケタマブ",T:"TECVAYLI teclistamab テクリスタマブ",C:"CARVYKTI cilta-cel シルタカブタゲン オートルユーセル",X:"JNJ-5322",I:"SARCLISA isatuximab イサツキシマブ",A:"ABECMA ide-cel idecabtagene vicleucel イデカブタゲン ビクルユーセル"};
+const populations={F:"初発（全体）",E:"初発・移植適応",I:"初発・移植非適応",P:"初発・移植後",S:"くすぶり型",R:"再発・難治性"};
+const formats={"口頭":"口頭","ポスター":"ポスター","オンライン":"オンライン"};
+const detailFields={participants:"対象患者",design:"試験方法・比較",results:"主な結果",limitations:"安全性・解釈上の留意点"};
+const storageKey="ash-myeloma-years-v1";
+const $=id=>document.getElementById(id);
+const make=(name,value,cls)=>{const element=document.createElement(name);if(value!=null)element.textContent=value;if(cls)element.className=cls;return element};
+const validUrl=value=>{try{return new URL(value).protocol==="https:"}catch{return false}};
+const nonempty=value=>typeof value==="string"&&value.trim().length>0;
+function validate(catalog){
+  if(catalog?.schemaVersion!==1||!Number.isInteger(catalog.year)||catalog.year<2026||catalog.year>2100||!["title","period","location","asOf","scope"].every(key=>nonempty(catalog[key]))||!validUrl(catalog.source)||!validUrl(catalog.release)||(catalog.program!=null&&!validUrl(catalog.program))||!Array.isArray(catalog.reports)||!catalog.reports.length)throw Error("年度・出典・演題一覧の形式を確認してください。");
+  const ids=new Set();
+  for(const row of catalog.reports){
+    if(!row||!["id","study","title","summary"].every(key=>nonempty(row[key]))||ids.has(row.id)||(row.details!=null&&(typeof row.details!=="object"||Array.isArray(row.details)||!Object.keys(row.details).length||!Object.entries(row.details).every(([key,value])=>Object.hasOwn(detailFields,key)&&nonempty(value))))||(row.abstractUrl!=null&&!validUrl(row.abstractUrl))||!Object.hasOwn(populations,row.population)||row.population==="F"||!Object.hasOwn(formats,row.format)||!Array.isArray(row.products)||!row.products.every(key=>Object.hasOwn(aliases,key))||!Array.isArray(row.tags)||!row.tags.every(nonempty)||typeof row.date!=="string"||!/^\d{4}-\d{2}-\d{2}$/.test(row.date)||!row.date.startsWith(catalog.year+"-")||!Number.isFinite(Date.parse(row.date))||new Date(row.date).toISOString().slice(0,10)!==row.date)throw Error("演題の形式または演題番号の重複を確認してください。");
+    ids.add(row.id);
+  }
+  return catalog;
+}
+let saved={};
+try{for(const entry of Object.values(JSON.parse(localStorage.getItem(storageKey)||"{}"))){try{saved[entry.year]=validate(entry)}catch{}}}catch{}
+const published={};
+const catalogFor=year=>saved[year]||published[year]||initial;
+let current=initial.year;
+const active={products:new Set(),population:new Set(),format:new Set(),tags:new Set()};
+const groups=[["products","製品",products],["population","対象患者",populations],["format","発表形式",formats],["tags","研究・患者背景",{}]];
+function values(row,key){
+  if(key==="products")return row.products.length?row.products:["N"];
+  if(key==="population")return ["E","I","P"].includes(row.population)?[row.population,"F"]:[row.population];
+  if(key==="tags")return row.tags;
+  return [row[key]];
+}
+function render(){
+  const c=catalogFor(current);
+  $("event").textContent=c.title+" ｜ "+c.period+" ｜ "+c.location;
+  $("program").hidden=!c.program;
+  if(c.program)$("program").href=c.program;
+  $("pdf").href=c.source;$("release").href=c.release;
+  $("scope").textContent=c.scope+"（"+c.asOf+"時点）";
+  $("overview").replaceChildren();
+  const notes=current===2026?{F:"PERSEUSの維持中止、AURIGAの移植後維持、MajesTEC-5の三重特異性抗体、移植非適応のBENEFITなど。",S:"AQUILAの最終生存解析と、SPARKとの経過観察成績の比較。",R:"MonumenTAL-6の第3相主要解析、CAR-Tの転帰・安全性、二重特異性抗体の実臨床報告、アベクマ投与後の感染解析。"}:{};
+  for(const key of ["F","S","R"]){
+    const n=c.reports.filter(row=>values(row,"population").includes(key)).length;
+    const block=make("div");block.append(make("strong",populations[key]+" · "+n+"件"));
+    if(c.year===initial.year&&notes[key])block.append(make("p",notes[key]));
+    $("overview").append(block);
+  }
+  const drugNotes={
+    D:"初発のPERSEUS・AURIGAと、高リスクくすぶり型のAQUILAが中心。再発・難治性での併用解析も収載。",
+    I:"移植非適応の初発ではBENEFITの48か月成績とQOL比較。移植適応・移植後の報告も収載。",
+    A:"CIBMTRの投与後感染解析と、CAR-T・二重特異性抗体の間接比較。",
+    V:"MonumenTAL-6の早期ライン併用、口腔関連有害事象、単剤の実臨床。",
+    T:"タービーとの併用成績、ダラツムマブ併用の薬力学、感染対策と実臨床。",
+    C:"CARTITUDE-4のサブグループ、投与前の腫瘍量、神経系有害事象と実臨床での安全性。",
+    X:"開発中の三重特異性抗体。移植適応の初発でダラツムマブ・レナリドミドと併用。"
+  };
+  $("drugOverview").replaceChildren();
+  for(const key of ["D","I","A","V","T","C","X"]){
+    const count=c.reports.filter(row=>row.products.includes(key)).length;
+    if(!count)continue;
+    const block=make("div");
+    block.append(make("h3",products[key]+" · "+count+"件"));
+    if(c.year===initial.year)block.append(make("p",drugNotes[key]));
+    const open=make("button","演題を表示");
+    open.setAttribute("aria-label",products[key]+"の演題を表示");
+    open.addEventListener("click",()=>{
+      Object.values(active).forEach(set=>set.clear());
+      $("search").value="";
+      active.products.add(key);
+      render();
+      $("count").scrollIntoView({block:"start"});
+    });
+    block.append(open);
+    $("drugOverview").append(block);
+  }
+  $("filters").replaceChildren();
+  for(const [key,label,defaults] of groups){
+    const labels=key==="tags"?Object.fromEntries([...new Set(c.reports.flatMap(row=>row.tags))].map(tag=>[tag,tag==="Len-R"?"Len-R（レナリドミド抵抗性）":tag])):defaults;
+    if(!Object.keys(labels).length)continue;
+    const row=make("div",null,"row");row.append(make("strong",label));
+    const chips=make("div",null,"chips");
+    for(const [value,name] of Object.entries(labels)){
+      const n=c.reports.filter(report=>values(report,key).includes(value)).length;
+      const button=make("button",name+" "+n);button.dataset.group=key;button.dataset.value=value;
+      button.setAttribute("aria-pressed",String(active[key].has(value)));
+      chips.append(button);
+    }
+    row.append(chips);$("filters").append(row);
+  }
+  renderCards();
+}
+function renderCards(){
+  const c=catalogFor(current);
+  const tokens=$("search").value.normalize("NFKC").trim().toLowerCase().split(/\s+/);
+  const rows=c.reports.filter(row=>Object.entries(active).every(([key,set])=>!set.size||values(row,key).some(value=>set.has(value)))&&tokens.every(token=>[row.id,row.study,row.title,row.summary,populations[row.population],row.format,...row.tags,...row.products.flatMap(code=>[products[code],aliases[code]])].join(" ").normalize("NFKC").toLowerCase().includes(token)));
+  $("count").textContent=rows.length+" / "+c.reports.length+" 件";
+  $("cards").replaceChildren();
+  if(!rows.length){$("cards").append(make("p","該当する演題はありません。", "panel"));return}
+  for(const row of rows){
+    const card=make("article");
+    card.append(make("div","#"+row.id+"　"+row.format+"　"+row.date.slice(5).replace("-","/")+"（現地）","meta"),make("p",row.study,"study"),make("h3",row.title),make("p",row.summary));
+    const tags=make("div",null,"chips");
+    for(const label of [populations[row.population],...values(row,"products").map(key=>products[key]),...row.tags])tags.append(make("span",label,"badge"));
+    card.append(tags);
+    const detail=make("details",null,"report-detail");
+    const disclosure=make("summary","演題の詳細");
+    disclosure.setAttribute("aria-label","#"+row.id+" "+row.study+"の演題詳細");
+    detail.append(disclosure);
+    const list=make("dl");
+    for(const [name,value] of [["対象区分",populations[row.population]],...Object.entries(detailFields).map(([key,label])=>[label,row.details?.[key]])]){
+      if(value)list.append(make("dt",name),make("dd",value));
+    }
+    if(!row.details){
+      list.append(make("dt","報告内容"),make("dd",row.summary));
+      detail.append(make("p",row.abstractUrl?"全文はASH公式抄録をご覧ください。":"公開演題一覧に基づく要約です。公式プログラムで演題番号を検索できます。","hint"));
+    }
+    detail.append(list);
+    const source=make("a",row.abstractUrl?"ASH公式抄録（原文）":c.program?"ASH公式プログラム":"演題の出典","source");
+    source.href=row.abstractUrl||c.program||c.source;
+    detail.append(source);card.append(detail);
+    $("cards").append(card);
+  }
+}
+function years(){
+  $("year").replaceChildren(...[...new Set([initial.year,...Object.keys(saved).map(Number),...Object.keys(published).map(Number)])].sort((a,b)=>b-a).map(year=>{const option=make("option",year+"年");option.value=year;return option}));
+  $("year").value=current;
+}
+function reset(){Object.values(active).forEach(set=>set.clear());$("search").value="";render()}
+$("filters").addEventListener("click",event=>{
+  const button=event.target.closest("button[data-group]");
+  if(!button)return;
+  const {group,value}=button.dataset;
+  if(active[group].has(value))active[group].delete(value);else active[group].add(value);
+  button.setAttribute("aria-pressed",String(active[group].has(value)));
+  renderCards();
+});
+$("search").addEventListener("input",renderCards);
+$("year").addEventListener("change",()=>{current=Number($("year").value);reset()});
+$("clear").addEventListener("click",reset);
+$("export").addEventListener("click",()=>{
+  const url=URL.createObjectURL(new Blob([JSON.stringify(catalogFor(current),null,2)],{type:"application/json"}));
+  const link=make("a");link.href=url;link.download="ash-"+current+"-myeloma.json";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+$("import").addEventListener("change",async event=>{
+  const file=event.target.files[0];if(!file)return;
+  try{
+    if(file.size>4000000)throw Error("4 MB以下のJSONを指定してください。");
+    const catalog=validate(JSON.parse((await file.text()).replace(/^\uFEFF/,"")));
+    const next={...saved,[catalog.year]:catalog};
+    localStorage.setItem(storageKey,JSON.stringify(next));
+    saved=next;current=catalog.year;years();reset();
+    $("status").textContent=catalog.year+"年のデータを保存しました。";
+  }catch(error){$("status").textContent="読み込みエラー。 "+error.message}
+  finally{event.target.value=""}
+});
+validate(initial);years();render();
+async function loadPublished(){
+  try{
+    const response=await fetch("/api/catalogs");
+    if(!response.ok)return;
+    const entries=await response.json();
+    if(!Array.isArray(entries))return;
+    for(const entry of entries){
+      try{const catalog=validate(entry);published[catalog.year]=catalog}catch{}
+    }
+    years();render();
+  }catch{}
+}
+if(location.protocol==="https:"||location.protocol==="http:")loadPublished();
+</script></html>

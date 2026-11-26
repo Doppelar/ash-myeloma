@@ -1,0 +1,1 @@
+{"name":"ash-myeloma","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node --test","db:publish":"node --env-file-if-exists=.env.local scripts/publish.mjs"},"dependencies":{"@neondatabase/serverless":"^1.0.2"},"engines":{"node":">=22"}}
