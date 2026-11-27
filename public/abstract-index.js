@@ -22,6 +22,12 @@ const myelomaTopics=[
   [/quality of life|patient.reported|disparit|access to|healthcare|health care|cost|economic|caregiver/i,"生活の質・医療アクセス"],
   [/incidence|prevalence|epidemiolog|risk factor/i,"疫学・発症リスク"],
 ];
+const bispecificTopic="二重特異性抗体";
+const bispecificTargets=[
+  [/\bBCMA\b|teclistamab|elranatamab|linvoseltamab|etentamig|velinotamig|alnuctamab/i,"BCMA標的"],
+  [/\bGPRC5D\b|talquetamab|QLS32015/i,"GPRC5D標的"],
+  [/\bFcRH5\b|cevostamab|NI-4101/i,"FcRH5標的"],
+];
 const requested=new URLSearchParams(location.search).get("disease");
 const disease=Object.hasOwn(diseases,requested)?requested:"mm";
 const $=id=>document.getElementById(id);
@@ -33,6 +39,10 @@ const make=(tag,value,cls)=>{
 };
 let records=[];
 let selectedTopic="";
+const targetFilter=make("select");
+const targetLabel=make("label","標的で絞り込み ");
+targetLabel.append(targetFilter);
+targetLabel.hidden=true;
 const topicButtons=new Map();
 let japaneseAbstracts={};
 const japaneseOnly=make("input");
@@ -59,6 +69,8 @@ function topicFor(title){
   return categories.find(([pattern])=>pattern.test(title))?.[1]??(disease==="mm"?"その他の研究":"研究・臨床報告");
 }
 function showTopics(){
+  $("topic-panel").append(targetLabel);
+  targetFilter.addEventListener("change",()=>{page=1;render();});
   const counts=new Map();
   for(const row of records)counts.set(row.topic,(counts.get(row.topic)??0)+1);
   const options=[["",records.length],...[...counts].sort((a,b)=>b[1]-a[1])];
@@ -69,6 +81,8 @@ function showTopics(){
     button.addEventListener("click",()=>{
       topicButtons.get(selectedTopic).setAttribute("aria-pressed","false");
       selectedTopic=topic;
+      targetLabel.hidden=topic!==bispecificTopic;
+      targetFilter.value="";
       button.setAttribute("aria-pressed","true");
       page=1;
       render();
@@ -76,20 +90,30 @@ function showTopics(){
     topicButtons.set(topic,button);
     $("topics").append(button);
   }
+  const targetCounts=new Map();
+  for(const row of records){
+    for(const target of row.targets)targetCounts.set(target,(targetCounts.get(target)??0)+1);
+  }
+  targetFilter.append(new Option("すべての標的",""));
+  for(const target of [...bispecificTargets.map(([,label])=>label),"その他・標的記載なし"]){
+    const count=targetCounts.get(target);
+    if(count)targetFilter.append(new Option(target+"（"+count+"件）",target));
+  }
   $("topic-panel").hidden=false;
 }
 function render(){
   const tokens=$("q").value.normalize("NFKC").toLowerCase().trim().split(/\s+/);
   const matches=records.filter(row=>{
     if(selectedTopic&&row.topic!==selectedTopic)return false;
+    if(targetFilter.value&&!row.targets.includes(targetFilter.value))return false;
     const japanese=japaneseAbstracts[row.pid];
     if(japaneseOnly.checked&&!japanese?.abstract?.length)return false;
-    const searchable=[row.title,row.pid,row.topic,japanese?.title,japanese?.summary].join(" ").normalize("NFKC").toLowerCase();
+    const searchable=[row.title,row.pid,row.topic,...row.targets,japanese?.title,japanese?.summary].join(" ").normalize("NFKC").toLowerCase();
     return ($("match").value==="all"||row.titleMatch)&&($("format").value==="all"||row.format===$("format").value)&&tokens.every(token=>searchable.includes(token));
   });
   const pages=Math.max(1,Math.ceil(matches.length/pageSize));
   page=Math.min(page,pages);
-  $("count").textContent=selectedTopic?selectedTopic+" · "+matches.length+"件":matches.length+" / "+records.length+" 演題";
+  $("count").textContent=selectedTopic?[selectedTopic,targetFilter.value].filter(Boolean).join(" · ")+" · "+matches.length+"件":matches.length+" / "+records.length+" 演題";
   $("records").replaceChildren();
   for(const row of matches.slice((page-1)*pageSize,page*pageSize)){
     const card=make("article",null,"record");
@@ -100,7 +124,7 @@ function render(){
     link.href="https://onlineprogram.hematology.org/paper-details.aspx?pid="+row.pid;
     title.append(link);
     const meta=[formats[row.format],row.day?"12月"+row.day+"日（現地）":null,row.titleMatch?"演題名で一致":"公式検索で一致"].filter(Boolean).join(" · ");
-    card.append(make("div",row.topic,"topic"),title,make("div",meta,"meta"));
+    card.append(make("div",[row.topic,...row.targets].join(" · "),"topic"),title,make("div",meta,"meta"));
     if(japanese){
       const source=make("a","ASH公式抄録");
       source.href=link.href;
@@ -144,7 +168,14 @@ try{
       if(summaries.ok)japaneseAbstracts=await summaries.json();
     }catch{}
   }
-  records=catalog.records.map(row=>({...row,topic:topicFor(row.title)}));
+  records=catalog.records.map(row=>{
+    const topic=topicFor(row.title);
+    const targets=disease==="mm"&&topic===bispecificTopic
+      ?bispecificTargets.filter(([pattern])=>pattern.test(row.title)).map(([,label])=>label)
+      :[];
+    if(disease==="mm"&&topic===bispecificTopic&&!targets.length)targets.push("その他・標的記載なし");
+    return {...row,topic,targets};
+  });
   if(disease==="mm")showTopics();
   $("scope").textContent="ASH公式検索の収録件数 "+records.length+"件（"+catalog.asOf+"取得）。検索語 "+catalog.queries.join(" / ");
   render();
