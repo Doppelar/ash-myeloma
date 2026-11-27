@@ -23,6 +23,7 @@ const myelomaTopics=[
   [/incidence|prevalence|epidemiolog|risk factor/i,"疫学・発症リスク"],
 ];
 const bispecificTopic="二重特異性抗体";
+const additionalMyelomaBispecifics=/etentamig|velinotamig|alnuctamab|cevostamab|NI-4101|QLS32015/i;
 const bispecificTargets=[
   [/\bBCMA\b|teclistamab|elranatamab|linvoseltamab|etentamig|velinotamig|alnuctamab/i,"BCMA標的"],
   [/\bGPRC5D\b|talquetamab|QLS32015/i,"GPRC5D標的"],
@@ -65,7 +66,9 @@ for(const [key,label] of Object.entries(diseases)){
   $("tabs").append(link);
 }
 function topicFor(title){
-  const categories=disease==="mm"?[...topics,...myelomaTopics]:topics;
+  const categories=disease==="mm"
+    ?[...topics.slice(0,2),[additionalMyelomaBispecifics,bispecificTopic],...topics.slice(2),...myelomaTopics]
+    :topics;
   return categories.find(([pattern])=>pattern.test(title))?.[1]??(disease==="mm"?"その他の研究":"研究・臨床報告");
 }
 function showTopics(){
