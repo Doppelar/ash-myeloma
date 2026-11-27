@@ -25,6 +25,16 @@ const make=(tag,value,cls)=>{
   return item;
 };
 let records=[];
+let japaneseAbstracts={};
+const japaneseOnly=make("input");
+japaneseOnly.type="checkbox";
+if(disease==="mm"){
+  const label=make("label");
+  label.append(japaneseOnly," 日本語抄録あり");
+  document.querySelector(".filters").append(label);
+  document.querySelector(".hint").textContent="日本語抄録がある演題は、日本語の見出しと要約を表示します。公式サイトで英語の原文を確認できます。";
+}
+japaneseOnly.addEventListener("change",()=>{page=1;render();});
 let page=1;
 const pageSize=30;
 $("heading").textContent=diseases[disease]+" 演題索引";
@@ -41,7 +51,9 @@ function topicFor(title){
 function render(){
   const tokens=$("q").value.normalize("NFKC").toLowerCase().trim().split(/\s+/);
   const matches=records.filter(row=>{
-    const searchable=(row.title+" "+row.pid+" "+topicFor(row.title)).normalize("NFKC").toLowerCase();
+    const japanese=japaneseAbstracts[row.pid];
+    if(japaneseOnly.checked&&!japanese)return false;
+    const searchable=[row.title,row.pid,topicFor(row.title),japanese?.title,japanese?.summary].join(" ").normalize("NFKC").toLowerCase();
     return ($("match").value==="all"||row.titleMatch)&&($("format").value==="all"||row.format===$("format").value)&&tokens.every(token=>searchable.includes(token));
   });
   const pages=Math.max(1,Math.ceil(matches.length/pageSize));
@@ -50,12 +62,28 @@ function render(){
   $("records").replaceChildren();
   for(const row of matches.slice((page-1)*pageSize,page*pageSize)){
     const card=make("article",null,"record");
-    const title=make("h2");title.lang="en";
-    const link=make("a",row.title);
+    const japanese=japaneseAbstracts[row.pid];
+    const title=make("h2");
+    title.lang=japanese?"ja":"en";
+    const link=make("a",japanese?.title??row.title);
     link.href="https://onlineprogram.hematology.org/paper-details.aspx?pid="+row.pid;
     title.append(link);
     const meta=[formats[row.format],row.day?"12月"+row.day+"日（現地）":null,row.titleMatch?"演題名で一致":"公式検索で一致"].filter(Boolean).join(" · ");
     card.append(make("div",topicFor(row.title),"topic"),title,make("div",meta,"meta"));
+    if(japanese){
+      const original=make("p",row.title,"meta");
+      original.lang="en";
+      const detail=make("details");
+      detail.append(make("summary","抄録の日本語要約"),make("p",japanese.summary));
+      if(japanese.details){
+        const fields=make("dl");
+        for(const [key,label] of Object.entries({participants:"対象",design:"方法",results:"結果",limitations:"限界"})){
+          if(japanese.details[key])fields.append(make("dt",label),make("dd",japanese.details[key]));
+        }
+        detail.append(fields);
+      }
+      card.append(original,detail);
+    }
     $("records").append(card);
   }
   if(!matches.length)$("records").append(make("p","条件に一致する演題はありません。"));
@@ -73,6 +101,12 @@ try{
   const response=await fetch("/indexes/"+disease+"-2026.json");
   if(!response.ok)throw Error("Missing catalog");
   const catalog=await response.json();
+  if(disease==="mm"){
+    try{
+      const summaries=await fetch("/indexes/mm-2026-ja.json");
+      if(summaries.ok)japaneseAbstracts=await summaries.json();
+    }catch{}
+  }
   records=catalog.records;
   $("scope").textContent="ASH公式検索の収録件数 "+records.length+"件（"+catalog.asOf+"取得）。検索語 "+catalog.queries.join(" / ");
   render();
