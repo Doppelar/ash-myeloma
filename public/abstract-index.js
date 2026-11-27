@@ -15,6 +15,13 @@ const topics=[
   [/survival|prognos|outcome|mortality/i,"生存・予後"],
   [/genom|sequencing|mutation|transcriptom|molecular/i,"ゲノム・分子解析"],
 ];
+const myelomaTopics=[
+  [/amyloido|\bMGUS\b|smoldering|smouldering|plasma cell leukemia|plasmacytoma/i,"前駆病変・関連疾患"],
+  [/screening|diagnos|imaging|\bPET\b|\bMRI\b|biomarker|mass spectrometr/i,"診断・バイオマーカー"],
+  [/daratumumab|isatuximab|\bCD38\b|bortezomib|carfilzomib|ixazomib|lenalidomide|pomalidomide|belantamab|selinexor|venetoclax|iberdomide|mezigdomide|induction|maintenance|first.line|frontline|newly diagnosed|relapsed|refractory|therapy|therapies|therapeutic|regimen|treatment/i,"薬物療法・治療戦略"],
+  [/quality of life|patient.reported|disparit|access to|healthcare|health care|cost|economic|caregiver/i,"生活の質・医療アクセス"],
+  [/incidence|prevalence|epidemiolog|risk factor/i,"疫学・発症リスク"],
+];
 const requested=new URLSearchParams(location.search).get("disease");
 const disease=Object.hasOwn(diseases,requested)?requested:"mm";
 const $=id=>document.getElementById(id);
@@ -25,6 +32,8 @@ const make=(tag,value,cls)=>{
   return item;
 };
 let records=[];
+let selectedTopic="";
+const topicButtons=new Map();
 let japaneseAbstracts={};
 const japaneseOnly=make("input");
 japaneseOnly.type="checkbox";
@@ -46,19 +55,41 @@ for(const [key,label] of Object.entries(diseases)){
   $("tabs").append(link);
 }
 function topicFor(title){
-  return topics.find(([pattern])=>pattern.test(title))?.[1]??"研究・臨床報告";
+  const categories=disease==="mm"?[...topics,...myelomaTopics]:topics;
+  return categories.find(([pattern])=>pattern.test(title))?.[1]??(disease==="mm"?"その他の研究":"研究・臨床報告");
+}
+function showTopics(){
+  const counts=new Map();
+  for(const row of records)counts.set(row.topic,(counts.get(row.topic)??0)+1);
+  const options=[["",records.length],...[...counts].sort((a,b)=>b[1]-a[1])];
+  for(const [topic,count] of options){
+    const button=make("button",(topic||"すべて")+"（"+count+"件）");
+    button.type="button";
+    button.setAttribute("aria-pressed",String(!topic));
+    button.addEventListener("click",()=>{
+      topicButtons.get(selectedTopic).setAttribute("aria-pressed","false");
+      selectedTopic=topic;
+      button.setAttribute("aria-pressed","true");
+      page=1;
+      render();
+    });
+    topicButtons.set(topic,button);
+    $("topics").append(button);
+  }
+  $("topic-panel").hidden=false;
 }
 function render(){
   const tokens=$("q").value.normalize("NFKC").toLowerCase().trim().split(/\s+/);
   const matches=records.filter(row=>{
+    if(selectedTopic&&row.topic!==selectedTopic)return false;
     const japanese=japaneseAbstracts[row.pid];
     if(japaneseOnly.checked&&!japanese?.abstract?.length)return false;
-    const searchable=[row.title,row.pid,topicFor(row.title),japanese?.title,japanese?.summary].join(" ").normalize("NFKC").toLowerCase();
+    const searchable=[row.title,row.pid,row.topic,japanese?.title,japanese?.summary].join(" ").normalize("NFKC").toLowerCase();
     return ($("match").value==="all"||row.titleMatch)&&($("format").value==="all"||row.format===$("format").value)&&tokens.every(token=>searchable.includes(token));
   });
   const pages=Math.max(1,Math.ceil(matches.length/pageSize));
   page=Math.min(page,pages);
-  $("count").textContent=matches.length+" / "+records.length+" 演題";
+  $("count").textContent=selectedTopic?selectedTopic+" · "+matches.length+"件":matches.length+" / "+records.length+" 演題";
   $("records").replaceChildren();
   for(const row of matches.slice((page-1)*pageSize,page*pageSize)){
     const card=make("article",null,"record");
@@ -69,7 +100,7 @@ function render(){
     link.href="https://onlineprogram.hematology.org/paper-details.aspx?pid="+row.pid;
     title.append(link);
     const meta=[formats[row.format],row.day?"12月"+row.day+"日（現地）":null,row.titleMatch?"演題名で一致":"公式検索で一致"].filter(Boolean).join(" · ");
-    card.append(make("div",topicFor(row.title),"topic"),title,make("div",meta,"meta"));
+    card.append(make("div",row.topic,"topic"),title,make("div",meta,"meta"));
     if(japanese){
       const source=make("a","ASH公式抄録");
       source.href=link.href;
@@ -113,7 +144,8 @@ try{
       if(summaries.ok)japaneseAbstracts=await summaries.json();
     }catch{}
   }
-  records=catalog.records;
+  records=catalog.records.map(row=>({...row,topic:topicFor(row.title)}));
+  if(disease==="mm")showTopics();
   $("scope").textContent="ASH公式検索の収録件数 "+records.length+"件（"+catalog.asOf+"取得）。検索語 "+catalog.queries.join(" / ");
   render();
 }catch{
