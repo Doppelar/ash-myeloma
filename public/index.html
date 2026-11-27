@@ -9,6 +9,16 @@
 .report-detail dl{margin:10px 0}
 .report-detail dt{font-weight:700}
 .report-detail dd{margin:0 0 9px}
+
+.study-slide{margin:14px 0 0;padding:14px;background:#e9f5f2;border:1px solid #b9d8d1;border-radius:11px}
+.study-slide figcaption{font-weight:750;color:#12554d;margin-bottom:8px}
+.slide-chart{display:grid;gap:8px}
+.slide-chart .bar-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 8px;font-size:.875rem}
+.slide-chart meter{width:100%;grid-column:1/-1;height:11px;appearance:none}
+.slide-chart meter::-webkit-meter-bar{background:#cde4df;border:0;border-radius:4px}
+.slide-chart meter::-webkit-meter-optimum-value{background:#107669;border-radius:4px}
+.slide-chart meter::-moz-meter-bar{background:#107669;border-radius:4px}
+.slide-note{font-size:.875rem;color:#315963;margin:8px 0 0}
 </style>
 <header><div class="head"><div class="kicker">ASH 演題ガイド</div><h1>多発性骨髄腫</h1><p id="event"></p><nav><a id="program" hidden>ASH公式プログラム</a><a id="pdf">J&J 演題一覧（PDF）</a><a id="release">企業発表</a></nav><div class="tools"><label for="year">開催年</label><select id="year"></select></div></div></header>
 <main>
@@ -110,6 +120,31 @@ function render(){
   }
   renderCards();
 }
+
+function monumenTalSlide(row,catalog){
+  const original=initial.reports.find(report=>report.id==="0426");
+  if(catalog.year!==2026||row.id!==original.id||row.abstractUrl!==original.abstractUrl||row.summary!==original.summary)return null;
+  const slide=make("figure",null,"study-slide");
+  slide.append(make("figcaption","12か月無増悪生存率"));
+  slide.append(make("p","再発・難治性多発性骨髄腫 · 前治療1〜4ライン","slide-note"));
+  const bars=make("div",null,"slide-chart");
+  for(const [label,pfs,infection] of [
+    ["テクベイリ＋タービー",88.6,31.7],
+    ["タービー＋ポマリドミド",73.1,25.4],
+    ["対照（EPd／PVd）",30.4,24.8],
+  ]){
+    const line=make("div",null,"bar-row");
+    const bar=make("meter");bar.min=0;bar.max=100;bar.value=pfs;
+    bar.setAttribute("aria-label",label);
+    line.append(make("span",label),make("strong",pfs.toFixed(1)+"%"),bar);
+    line.append(make("span","グレード3／4の感染 "+infection.toFixed(1)+"%", "slide-note"));
+    bars.append(line);
+  }
+  const source=make("a","ASH公式抄録 #426","source");
+  source.href=original.abstractUrl;
+  slide.append(bars,make("p","第3相中間解析 · 838人 · 追跡中央値13.4か月","slide-note"),source);
+  return slide;
+}
 function renderCards(){
   const c=catalogFor(current);
   const tokens=$("search").value.normalize("NFKC").trim().toLowerCase().split(/\s+/);
@@ -139,6 +174,8 @@ function renderCards(){
     const source=make("a",row.abstractUrl?"ASH公式抄録（原文）":c.program?"ASH公式プログラム":"演題の出典","source");
     source.href=row.abstractUrl||c.program||c.source;
     detail.append(source);card.append(detail);
+    const slide=monumenTalSlide(row,c);
+    if(slide)card.append(slide);
     $("cards").append(card);
   }
 }

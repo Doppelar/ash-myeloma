@@ -41,3 +41,11 @@ test("published years leave the bundled fallback available", () => {
   assert.equal(run("catalogFor(2026).year"), 2026);
   assert.equal(run("catalogFor(2027).year"), 2027);
 });
+
+test("one pilot slide displays the published MonumenTAL-6 percentages", () => {
+  const { elements } = app();
+  const slides = elements.cards.children.flatMap(card => card.children.filter(child => child.tag === "figure"));
+  assert.equal(slides.length, 1);
+  const chart = slides[0].children.find(child => child.children.some(row => row.children.some(item => item.tag === "meter")));
+  assert.deepEqual(chart.children.map(row => row.children.find(child => child.tag === "meter").value), [88.6, 73.1, 30.4]);
+});
