@@ -30,9 +30,9 @@ const japaneseOnly=make("input");
 japaneseOnly.type="checkbox";
 if(disease==="mm"){
   const label=make("label");
-  label.append(japaneseOnly," 日本語抄録あり");
+  label.append(japaneseOnly," 抄録の全文訳あり");
   document.querySelector(".filters").append(label);
-  document.querySelector(".hint").textContent="日本語抄録がある演題は、日本語の見出しと要約を表示します。公式サイトで英語の原文を確認できます。";
+  document.querySelector(".hint").textContent="翻訳済みの演題は、日本語の演題名、要約、公式抄録の日本語訳を表示します。翻訳準備中の演題は公式サイトで確認できます。";
 }
 japaneseOnly.addEventListener("change",()=>{page=1;render();});
 let page=1;
@@ -52,7 +52,7 @@ function render(){
   const tokens=$("q").value.normalize("NFKC").toLowerCase().trim().split(/\s+/);
   const matches=records.filter(row=>{
     const japanese=japaneseAbstracts[row.pid];
-    if(japaneseOnly.checked&&!japanese)return false;
+    if(japaneseOnly.checked&&!japanese?.abstract?.length)return false;
     const searchable=[row.title,row.pid,topicFor(row.title),japanese?.title,japanese?.summary].join(" ").normalize("NFKC").toLowerCase();
     return ($("match").value==="all"||row.titleMatch)&&($("format").value==="all"||row.format===$("format").value)&&tokens.every(token=>searchable.includes(token));
   });
@@ -71,10 +71,16 @@ function render(){
     const meta=[formats[row.format],row.day?"12月"+row.day+"日（現地）":null,row.titleMatch?"演題名で一致":"公式検索で一致"].filter(Boolean).join(" · ");
     card.append(make("div",topicFor(row.title),"topic"),title,make("div",meta,"meta"));
     if(japanese){
-      const original=make("p",row.title,"meta");
-      original.lang="en";
+      const source=make("a","ASH公式抄録");
+      source.href=link.href;
+      card.append(make("p",japanese.summary),source);
+      if(japanese.abstract?.length){
+        const full=make("details");
+        full.append(make("summary","抄録の日本語全文"),...japanese.abstract.map(paragraph=>make("p",paragraph)));
+        card.append(full);
+      }
       const detail=make("details");
-      detail.append(make("summary","抄録の日本語要約"),make("p",japanese.summary));
+      detail.append(make("summary","研究の詳細"));
       if(japanese.details){
         const fields=make("dl");
         for(const [key,label] of Object.entries({participants:"対象",design:"方法",results:"結果",limitations:"限界"})){
@@ -82,7 +88,7 @@ function render(){
         }
         detail.append(fields);
       }
-      card.append(original,detail);
+      if(japanese.details)card.append(detail);
     }
     $("records").append(card);
   }
