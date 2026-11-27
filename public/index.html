@@ -19,6 +19,10 @@
 .slide-chart meter::-webkit-meter-optimum-value{background:#107669;border-radius:4px}
 .slide-chart meter::-moz-meter-bar{background:#107669;border-radius:4px}
 .slide-note{font-size:.875rem;color:#315963;margin:8px 0 0}
+
+.study-image{margin:14px 0 0}
+.study-image img{display:block;width:100%;height:auto;border-radius:9px}
+.study-image figcaption{margin-top:6px}
 </style>
 <header><div class="head"><div class="kicker">ASH 演題ガイド</div><h1>多発性骨髄腫</h1><p id="event"></p><nav><a id="program" hidden>ASH公式プログラム</a><a id="pdf">J&J 演題一覧（PDF）</a><a id="release">企業発表</a></nav><div class="tools"><label for="year">開催年</label><select id="year"></select></div></div></header>
 <main>
@@ -176,6 +180,21 @@ function renderCards(){
     detail.append(source);card.append(detail);
     const slide=monumenTalSlide(row,c);
     if(slide)card.append(slide);
+    if(c.year===2026&&row.id==="0112"&&row.abstractUrl==="https://onlineprogram.hematology.org/paper-details.aspx?pid=693937"){
+      const figure=make("figure",null,"study-image");
+      const link=make("a");link.href="./aquila-0112.png";
+      const image=make("img");
+      image.src=link.href;
+      image.setAttribute("width","1200");
+      image.setAttribute("height","820");
+      image.setAttribute("loading","lazy");
+      image.setAttribute("alt","AQUILA第3相試験。7年全生存率は皮下ダラツムマブ群87.8%、積極的経過観察群78.7%。死亡のハザード比0.52（95%信頼区間0.32〜0.87）。画像を開く");
+      link.append(image);
+      const source=make("a","ASH公式抄録 #112","source");source.href=row.abstractUrl;
+      const caption=make("figcaption",null,"hint");
+      caption.append("タップで拡大 · ",source);
+      figure.append(link,caption);card.append(figure);
+    }
     $("cards").append(card);
   }
 }
