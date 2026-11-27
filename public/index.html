@@ -20,9 +20,14 @@
 .slide-chart meter::-moz-meter-bar{background:#107669;border-radius:4px}
 .slide-note{font-size:.875rem;color:#315963;margin:8px 0 0}
 
-.study-image{margin:14px 0 0}
-.study-image img{display:block;width:100%;height:auto;border-radius:9px}
-.study-image figcaption{margin-top:6px}
+
+.slide-facts{display:grid;gap:6px;margin:0 0 10px}
+.slide-facts div{background:white;padding:6px 9px;border-radius:6px}
+.slide-facts dt{font-size:.875rem;font-weight:700;color:#315963}
+.slide-facts dd{margin:0;overflow-wrap:anywhere}
+.slide-chart .slide-note{grid-column:1/-1;margin-top:0}
+.study-slide figcaption{font-size:1.03rem}
+.study-slide .source{display:inline-block;margin-top:7px}
 </style>
 <header><div class="head"><div class="kicker">ASH 演題ガイド</div><h1>多発性骨髄腫</h1><p id="event"></p><nav><a id="program" hidden>ASH公式プログラム</a><a id="pdf">J&J 演題一覧（PDF）</a><a id="release">企業発表</a></nav><div class="tools"><label for="year">開催年</label><select id="year"></select></div></div></header>
 <main>
@@ -125,28 +130,48 @@ function render(){
   renderCards();
 }
 
-function monumenTalSlide(row,catalog){
-  const original=initial.reports.find(report=>report.id==="0426");
-  if(catalog.year!==2026||row.id!==original.id||row.abstractUrl!==original.abstractUrl||row.summary!==original.summary)return null;
+const studyTopics={"2233":["第3相試験5件の間接比較","二重特異性抗体・CAR-Tの無増悪生存と全生存"],"2256":["ISASOCUTとIMROZの試験間比較","投与経路・ボルテゾミブ頻度の異なる群のQOL"],"2259":["GMMG-HD6／HD7のサブセット解析","採取した自家移植用細胞のMRD"],"2262":["移植後の無作為化比較","超高リスク患者の地固め・維持へのサークリサ追加"],"2272":["第3相試験・予後因子解析","CAR-T投与時の腫瘍量と転帰"],"2273":["前向き市販後調査・サブグループ解析","欧州・ブラジルでの早期CAR-T治療の安全性と有効性"],"2275":["MajesTEC-3／9の統合解析","免疫グロブリン補充と重症感染リスク"],"2294":["第1/2相の探索的解析","髄外病変の奏効と免疫細胞の変化"],"2786":["欧州の診療データ","4・5次治療の選択と生存"],"4008":["前向き第2相・検査法の比較","末梢血と骨髄のMRD測定"],"4020":["移植後維持療法・患者報告","ダラツムマブ追加時の健康関連QOL"],"4028":["移植後維持療法・最終解析","ダラツムマブ追加時の有効性と安全性"],"4045":["CIBMTR・後ろ向き登録データ解析","アベクマ投与後の感染と関連因子"],"4558":["2018〜2024年・多国間の実臨床研究","自家移植後の転帰"],"4561":["多地域の実臨床・初回報告","後治療ラインでのタルケタマブ単剤"],"5770":["第3相試験の安全性解析","併用治療中の感染と液性免疫"],"5776":["実臨床の事後解析","高齢患者におけるテクリスタマブ治療"],"5783":["移植後維持療法・最終解析","維持療法中のMRDの推移"],"6310":["米国の大学医療施設・後ろ向き観察研究","タルケタマブ治療後の実臨床転帰"],"6316":["後ろ向き診療録・登録データ","テクリスタマブ単剤の奏効・生存・感染"],"0695":["薬力学解析","腫瘍量の低下と細胞傷害性免疫の関連"],"0418":["予防的介入の有無で比較","口腔関連有害事象の発現・改善時期"],"0426":["第3相・3群無作為化","12か月無増悪生存率と感染"],"0110":["第2相・導入療法の初回報告","奏効の深さと導入中の有害事象"],"0111":["第3相・長期解析","無増悪生存率とMRDに基づく維持中止"],"0112":["第3相・最終解析","7年全生存率と活動性骨髄腫への進行"],"0940":["AQUILAと実臨床SPARKの試験間比較","積極的経過観察の転帰"],"0272":["多施設観察研究・初回解析","先制的ステロイドとパーキンソニズム"],"0276":["第3相試験・サブグループ解析","ダラツムマブ抵抗性患者の長期生存"],"0109":["第3相・48か月解析","サークリサ併用における4剤と3剤の比較"]};
+const studyCharts={"4045":["投与後に臨床的に重要な感染を報告",[["感染あり",44.7]],"投与後1年の登録データ · 367 / 821人"],"0426":["12か月無増悪生存率",[["テクベイリ＋タービー",88.6,"グレード3・4の感染 31.7%"],["タービー＋ポマリドミド",73.1,"グレード3・4の感染 25.4%"],["対照（EPd／PVd）",30.4,"グレード3・4の感染 24.8%"]],"838人 · 追跡中央値13.4か月"],"0112":["7年全生存率",[["皮下ダラツムマブ単剤",87.8],["積極的経過観察",78.7]],"390人 · 追跡中央値88.8か月 · 死亡のハザード比0.52（95%信頼区間 0.32〜0.87）"],"0111":["6年無増悪生存率",[["ダラツムマブ併用群",81.1],["VRd＋レナリドミド維持群",56.1]],"709人 · 追跡中央値81.3か月"],"0109":["48か月無増悪生存率",[["サークリサ＋VRd",74],["サークリサ＋Rd",65.7]],"48か月までの制限平均無増悪生存期間の群間差は統計学的に有意ではなかった（p=0.29）。"],"0110":["導入療法の奏効率",[["全奏効",100],["完全奏効以上",81]],"21人 · 追跡中央値7.1か月 · 単群の初回報告"]};
+const originalReports=new Map(initial.reports.map(row=>[row.id,row]));
+function studySlide(row,catalog){
+  const original=catalog.year===initial.year?originalReports.get(row.id):undefined;
+  const matching=original&&row.study===original.study&&row.summary===original.summary&&row.abstractUrl===original.abstractUrl;
+  const topic=matching?studyTopics[row.id]:undefined;
+  const chart=matching?studyCharts[row.id]:undefined;
   const slide=make("figure",null,"study-slide");
-  slide.append(make("figcaption","12か月無増悪生存率"));
-  slide.append(make("p","再発・難治性多発性骨髄腫 · 前治療1〜4ライン","slide-note"));
-  const bars=make("div",null,"slide-chart");
-  for(const [label,pfs,infection] of [
-    ["テクベイリ＋タービー",88.6,31.7],
-    ["タービー＋ポマリドミド",73.1,25.4],
-    ["対照（EPd／PVd）",30.4,24.8],
-  ]){
-    const line=make("div",null,"bar-row");
-    const bar=make("meter");bar.min=0;bar.max=100;bar.value=pfs;
-    bar.setAttribute("aria-label",label);
-    line.append(make("span",label),make("strong",pfs.toFixed(1)+"%"),bar);
-    line.append(make("span","グレード3／4の感染 "+infection.toFixed(1)+"%", "slide-note"));
-    bars.append(line);
+  slide.append(make("figcaption",chart?.[0]||"研究の要点"));
+  const facts=make("dl",null,"slide-facts");
+  const entries=[
+    ["対象",row.details?.participants||populations[row.population]],
+    ["研究・比較",topic?.[0]||row.details?.design||row.study],
+    [row.details?.results&&!chart?"主な結果":"評価の焦点",row.details?.results&&!chart?row.details.results:topic?.[1]||row.summary],
+  ];
+  for(const [label,value] of entries){
+    const fact=make("div");fact.append(make("dt",label),make("dd",value));facts.append(fact);
   }
-  const source=make("a","ASH公式抄録 #426","source");
-  source.href=original.abstractUrl;
-  slide.append(bars,make("p","第3相中間解析 · 838人 · 追跡中央値13.4か月","slide-note"),source);
+  slide.append(facts);
+  if(chart){
+    const [,series,note]=chart;
+    const bars=make("div",null,"slide-chart");
+    for(const [label,value,annotation] of series){
+      const line=make("div",null,"bar-row");
+      const bar=make("meter");bar.min=0;bar.max=100;bar.value=value;
+      bar.setAttribute("aria-label",label);
+      line.append(make("span",label),make("strong",value.toFixed(1)+"%"),bar);
+      if(annotation)line.append(make("span",annotation,"slide-note"));
+      bars.append(line);
+    }
+    slide.append(bars,make("p",note,"slide-note"));
+  }else if(!row.details?.results){
+    slide.append(make("p","公開資料で確認できた研究内容を表示しています。","slide-note"));
+  }
+  const source=make("a",row.abstractUrl?"ASH公式抄録":"出典の演題一覧","source");
+  source.href=row.abstractUrl||catalog.source;
+  slide.append(source);
+  if(chart&&row.id==="0112"){
+    const png=make("a","PNG画像","source");png.href="./aquila-0112.png";
+    slide.append(" · ",png);
+  }
   return slide;
 }
 function renderCards(){
@@ -178,23 +203,7 @@ function renderCards(){
     const source=make("a",row.abstractUrl?"ASH公式抄録（原文）":c.program?"ASH公式プログラム":"演題の出典","source");
     source.href=row.abstractUrl||c.program||c.source;
     detail.append(source);card.append(detail);
-    const slide=monumenTalSlide(row,c);
-    if(slide)card.append(slide);
-    if(c.year===2026&&row.id==="0112"&&row.abstractUrl==="https://onlineprogram.hematology.org/paper-details.aspx?pid=693937"){
-      const figure=make("figure",null,"study-image");
-      const link=make("a");link.href="./aquila-0112.png";
-      const image=make("img");
-      image.src=link.href;
-      image.setAttribute("width","1200");
-      image.setAttribute("height","820");
-      image.setAttribute("loading","lazy");
-      image.setAttribute("alt","AQUILA第3相試験。7年全生存率は皮下ダラツムマブ群87.8%、積極的経過観察群78.7%。死亡のハザード比0.52（95%信頼区間0.32〜0.87）。画像を開く");
-      link.append(image);
-      const source=make("a","ASH公式抄録 #112","source");source.href=row.abstractUrl;
-      const caption=make("figcaption",null,"hint");
-      caption.append("タップで拡大 · ",source);
-      figure.append(link,caption);card.append(figure);
-    }
+    card.append(studySlide(row,c));
     $("cards").append(card);
   }
 }

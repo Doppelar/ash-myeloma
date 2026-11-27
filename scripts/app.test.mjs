@@ -42,17 +42,19 @@ test("published years leave the bundled fallback available", () => {
   assert.equal(run("catalogFor(2027).year"), 2027);
 });
 
-test("one pilot slide displays the published MonumenTAL-6 percentages", () => {
+test("every abstract has an HTML figure and verified charts retain their values", () => {
   const { elements } = app();
-  const slides = elements.cards.children.flatMap(card => card.children.filter(child => child.tag === "figure" && child.className === "study-slide"));
-  assert.equal(slides.length, 1);
-  const chart = slides[0].children.find(child => child.children.some(row => row.children.some(item => item.tag === "meter")));
-  assert.deepEqual(chart.children.map(row => row.children.find(child => child.tag === "meter").value), [88.6, 73.1, 30.4]);
+  const slides = elements.cards.children.map(card => card.children.find(child => child.className === "study-slide"));
+  assert.equal(slides.filter(Boolean).length, 30);
+  const bars = slides.flatMap(slide => slide.children.filter(child => child.className === "slide-chart"));
+  assert.equal(bars.length, 6);
+  const percentages = chart => chart.children.map(row => row.children.find(child => child.tag === "meter").value);
+  assert.ok(bars.some(chart => String(percentages(chart)) === "88.6,73.1,30.4"));
+  assert.ok(bars.some(chart => String(percentages(chart)) === "87.8,78.7"));
+  assert.equal(slides.filter(slide => slide.children.some(child => child.href === "./aquila-0112.png")).length, 1);
 });
 
-test("AQUILA alone has a linked PNG under its abstract", () => {
-  const { elements } = app();
-  const figures = elements.cards.children.flatMap(card => card.children.filter(child => child.className === "study-image"));
-  assert.equal(figures.length, 1);
-  assert.equal(figures[0].children[0].children[0].src, "./aquila-0112.png");
+test("imported or revised results do not inherit fixed ASH 2026 chart values", () => {
+  const { run } = app();
+  assert.equal(run('studySlide({...originalReports.get("0426"), summary:"updated"},initial).children.some(child=>child.className==="slide-chart")'), false);
 });
